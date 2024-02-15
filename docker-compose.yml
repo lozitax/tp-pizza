@@ -6,7 +6,7 @@ services:
       - mongodb_data:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_PASSWORD: password
     ports:
       - "27017:27017"
     networks:
@@ -17,13 +17,16 @@ services:
     depends_on:
       - mongodb
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_BASICAUTH_USERNAME: admin # C'est pour l'authentification BasicAuth de Mongo Express lui-même
+      ME_CONFIG_BASICAUTH_PASSWORD: password # Assurez-vous de changer cela en quelque chose de plus sécurisé
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root # Ajoutez ceci pour correspondre au nom d'utilisateur MongoDB
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
       ME_CONFIG_MONGODB_SERVER: mongodb
     ports:
       - "8081:8081"
     networks:
       - pizza_network
+
 
   app:
     build: ./app
@@ -32,7 +35,7 @@ services:
     environment:
       DATABASE_HOST: mongodb
       DATABASE_USERNAME: root
-      DATABASE_PASSWORD: example
+      DATABASE_PASSWORD: password
     ports:
       - "3000:3000"
     networks:
