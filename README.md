@@ -16,3 +16,9 @@ e. Quelle recette de pizza a été la plus vendue ? : ```Cheese```
 f. Quel format de pizza a été le plus vendu ? : ```Medium```
 
 g. Quelle recette de pizza a rapporté le plus de revenus ? : ```Pepperoni```
+
+## Étape 4
+
+a. Calcul de la quantité de pizzas commandées par format "medium" pour chaque recette de pizza : ```3```
+
+b. Calcul du nombre moyen de pizzas commandées : ```8```
