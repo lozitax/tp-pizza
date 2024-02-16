@@ -1,5 +1,9 @@
 # tp-pizza
 
+Maxime Lemoine
+
+je me suis arrêter à l'étape 6
+
 ## Étape 3
 
 a. Quel est le montant total des commandes de pizzas (tous formats confondus) ? : ```2540```
