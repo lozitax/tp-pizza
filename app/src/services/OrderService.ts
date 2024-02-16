@@ -1,4 +1,5 @@
 import { MongoClient, Db } from 'mongodb';
+import fs from 'fs';
 
 class OrderService {
     private db: Db;
@@ -110,6 +111,51 @@ class OrderService {
         }
     }
 
+    async getQuantityByMediumSize() {
+        return this.db.collection('orders').aggregate([
+            { $match: { size: "medium" } },
+            { $group: { _id: "$name", totalQuantity: { $sum: "$quantity" } } }
+        ]).toArray();
+    }
+
+    async getAverageQuantityOrdered() {
+        const result = await this.db.collection('orders').aggregate([
+            { $group: { _id: null, totalQuantity: { $sum: "$quantity" }, count: { $sum: 1 } } },
+            { $project: { _id: 0, averageQuantity: { $divide: ["$totalQuantity", "$count"] } } }
+        ]).toArray();
+        return result.length > 0 ? result[0].averageQuantity : 0;
+    }
+
+    async getMenuDetails() {
+        const pipeline = [
+            {
+                $group: {
+                    _id: { name: "$name", size: "$size" },
+                    price: { $first: "$price" },
+                },
+            },
+            {
+                $project: {
+                    _id: 0,
+                    name: "$_id.name",
+                    size: "$_id.size",
+                    price: 1,
+                },
+            },
+            {
+                $sort: { name: 1, size: 1 },
+            },
+        ];
+
+        const menuDetails = await this.db.collection('orders').aggregate(pipeline).toArray();
+        return menuDetails;
+    }
+
+    async exportMenuToJson() {
+        const menu = await this.getMenuDetails();
+        fs.writeFileSync('menu.json', JSON.stringify(menu, null, 2), 'utf8');
+        console.log('Menu details exported to menu.json');
+    }
 }
 
 export default OrderService;

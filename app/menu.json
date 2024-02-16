@@ -1,0 +1,42 @@
+[
+  {
+    "price": 14,
+    "name": "Cheese",
+    "size": "large"
+  },
+  {
+    "price": 13,
+    "name": "Cheese",
+    "size": "medium"
+  },
+  {
+    "price": 12,
+    "name": "Cheese",
+    "size": "small"
+  },
+  {
+    "price": 21,
+    "name": "Pepperoni",
+    "size": "large"
+  },
+  {
+    "price": 20,
+    "name": "Pepperoni",
+    "size": "medium"
+  },
+  {
+    "price": 19,
+    "name": "Pepperoni",
+    "size": "small"
+  },
+  {
+    "price": 18,
+    "name": "Vegan",
+    "size": "medium"
+  },
+  {
+    "price": 17,
+    "name": "Vegan",
+    "size": "small"
+  }
+]
