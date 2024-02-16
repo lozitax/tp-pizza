@@ -27,7 +27,6 @@ services:
     networks:
       - pizza_network
 
-
   app:
     build: ./app
     depends_on:
@@ -41,9 +40,23 @@ services:
     networks:
       - pizza_network
 
+  pizzas_menu_api:
+    build: ./pizzas_menu_api
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+    environment:
+      DATABASE_HOST: mongodb
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: password
+    networks:
+      - pizza_network
+
 networks:
   pizza_network:
     name: pizza_network
 
 volumes:
   mongodb_data:
+  pizzas_menu_db_data:
